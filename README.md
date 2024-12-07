@@ -8,9 +8,8 @@ A simple travel planner application to help users plan their trips with ease whi
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Licensing](#licensing)
 - [Contact](#contact)
 
 ## Introduction
