@@ -1,5 +1,6 @@
 import './index.css'
 import Navbar from './components/Navbar'
+import LandingPage from './pages/LandingPage'
 
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <LandingPage />
     </>
   )
 }
