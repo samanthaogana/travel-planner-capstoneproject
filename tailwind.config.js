@@ -4,6 +4,10 @@ export default {
   media: false,
   theme: {
     extend: {},
+    fontFamily: {
+      greatVibes: ["Great Vibes"],
+      poppins: ["Poppins"]
+    }
   },
   plugins: [],
 }
