@@ -11,39 +11,34 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
-      <div className="flex justify-between py-4 px-4">
-        <div>
-            <h1 className="font-greatVibes text-4xl">Travelscapes</h1> 
+    <nav className="fixed bg-white top-0 left-0 w-full z-20">
+      <div className="flex justify-between py-3 px-4 w-full">
+        <div className="font-greatVibes text-4xl text-black font-medium">
+          <h1>Travelscapes</h1>
         </div>
-
-        
-
-        <div onClick={toggleMenu} className="sm:hidden">
+        <div onClick={toggleMenu} className="sm:hidden relative">
           {menu ? <IoIosClose size={30} /> : <GiHamburgerMenu size={30} />}
-
-          <div>
-            {menu ? (
-              <ul className="flex flex-col gap-5 font-poppins">
-                <li>Home</li>
-                <li>Destinations</li>
-                <li>Itinerary</li>
-                <li>Contact Us</li>
-                <p className="font-semibold">
-                  <button>Log in</button>
-                </p>
-                <p className="font-bold">
-                  <button>Sign in</button>
-                </p>
-              </ul>
-            ) : null}
-          </div>
         </div>
       </div>
+      
+      {/* Mobile Menu */}
+      {menu ? (
+        <div className="sm:hidden bg-mintBlue  absolute top-16 right-0 w-full z-30 px-4 py-4">
+          <ul className="flex flex-col items-end gap-5 font-poppins text-white font-medium">
+            <li>Home</li>
+            <li>Itinerary</li>
+            <li>Contact Us</li>
+            <li>
+            <button className="font-semibold">Log in</button>
+            </li>
+            <li>
+            <button className="font-bold border rounded-md px-2 py-2 bg-yellowOrange">Sign in</button>
+            </li>
+          </ul>
+        </div>
+      ): null}
     </nav>
   );
 };
 
 export default Navbar;
-
-
