@@ -6,7 +6,7 @@ const LandingPage = () => {
       <section>
         <img
           className="w-full h-screen bg-contain bg-center"
-          src="src\assets\images\rachael-annabelle-NG2cP0H7_48-unsplash (1).jpg"
+          src="src\assets\images\pexels-asadphoto-29614936.jpg"
           alt="hero background"
         />
       </section>
