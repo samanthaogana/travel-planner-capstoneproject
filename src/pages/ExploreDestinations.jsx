@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import DestinationList from "../components/DestinationList";
 
 const ExploreDestinations = () => {
   return (
@@ -21,6 +22,10 @@ const ExploreDestinations = () => {
            <button type="submit" className="absolute left-20 top-3 mx-2 sm:left-72 sm:top-3" ><FaSearch /></button>
           </div>
         </form>
+      </section>
+      
+      <section>
+        <DestinationList />
       </section>
     </main>
   );
