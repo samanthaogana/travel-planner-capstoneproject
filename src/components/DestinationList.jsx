@@ -1,57 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { getDestinations } from './api'; // Import your Amadeus SDK helper function
+import React, { useEffect, useState } from 'react';
+import { getDestinations } from '../services/amadeusService';
 
 const DestinationList = () => {
   const [destinations, setDestinations] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [query, setQuery] = useState(''); // For search query
-  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchDestinations = async () => {
-      setLoading(true);
-      const result = await getDestinations(query);
-      if (result) {
-        setDestinations(result);
-      } else {
-        setError('Failed to fetch destinations');
+    const fetchData = async () => {
+      try {
+        const cities = ['new york', 'london', 'paris']; // Example cities
+        const data = await getDestinations(cities);
+        console.log('Fetched destinations:', data);
+        setDestinations(data);
+      } catch (error) {
+        console.error('Error fetching destinations:', error);
       }
-      setLoading(false);
     };
-
-    if (query) {
-      fetchDestinations();
-    } else {
-      setDestinations([]); // Clear results when there's no query
-    }
-  }, [query]); // Trigger on query change
+    fetchData();
+  }, []);
 
   return (
-    <div>
-      <h1>Destinations</h1>
-
-      {/* Search input */}
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for a city"
-      />
-
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-
-      <ul>
-        {destinations.length > 0 ? (
-          destinations.map((destination) => (
-            <li key={destination.iataCode}>
-              {destination.name} ({destination.countryCode})
-            </li>
-          ))
-        ) : (
-          <p>No destinations found</p>
-        )}
-      </ul>
+    <div className="flex flex-wrap justify-center gap-4 p-4">
+      {destinations.map((destination, index) => (
+        <div key={index} className="bg-white shadow-lg rounded-lg p-4 w-64 text-center">
+          <h2 className="text-xl font-bold">{destination.name}</h2>
+          <p className="text-gray-600">Country: {destination.country}</p>
+        </div>
+      ))}
     </div>
   );
 };
