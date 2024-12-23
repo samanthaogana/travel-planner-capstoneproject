@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDestinations } from './services/amadeusService';
+import { getDestinations } from '../services/amadeusService';
 
 const DestinationList = () => {
     const[destinations, setDestinations] = useState([]);
