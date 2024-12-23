@@ -1,10 +1,8 @@
-import amadeus from "amadeus";
-
-const Amadeus = require('amadeus');
+import Amadeus from 'amadeus';
 
 const amadeus = new Amadeus({
-    clientId: process.env.REACT_APP_AMADEUS_API_KEY,
-    clientSecret: process.env.REACT_APP_AMADEUS_API_SECRET
+    clientId: import.meta.env.VITE_AMADEUS_API_KEY,
+    clientSecret: import.meta.env.VITE_AMADEUS_API_SECRET
 });
 
 const getDestinations = async (keyword) => {
@@ -20,6 +18,6 @@ const getDestinations = async (keyword) => {
     }
 }
 
-export default { getDestinations }
+export { getDestinations };
 
 
