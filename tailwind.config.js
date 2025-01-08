@@ -11,7 +11,8 @@ export default {
     colors: {
       yellowOrange: "#FFA500",
       mintBlue: "#3b8bd3",
-      seaBlue: "#2A9B84"
+      seaBlue: "#2A9B84",
+      ghostWhite: "#f7f7f7"
     }
     }
   },
