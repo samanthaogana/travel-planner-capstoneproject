@@ -1,4 +1,7 @@
 import React from "react";
+import ExploreDestinations from "./ExploreDestinations";
+import ContactUs from "./ContactUs";
+import TestimonialsPage from "./TestimonialsPage";
 
 const LandingPage = () => {
   return (
@@ -6,7 +9,7 @@ const LandingPage = () => {
       <section>
         <img
           className="w-full h-screen object-cover object-center"
-          src="src\assets\images\pexels-asadphoto-29614936.jpg"
+          src="/images/pexels-asadphoto-29614936.jpg"
           alt="hero background"
         />
     
@@ -18,6 +21,17 @@ const LandingPage = () => {
         </div>
       </section>
 
+        <section>
+       <ExploreDestinations />
+       </section>
+
+       <section>
+        <TestimonialsPage />
+       </section>
+
+       <section>
+       <ContactUs />
+       </section>
      
     </main>
   );
