@@ -2,8 +2,18 @@ import axios from 'axios';
 
 const BASE_URL = "https://test.api.amadeus.com/v1/reference-data/locations"
 
-// Function to get access token
+let tokenData = {
+  accessToken: null,
+  expiryTime: null
+};
+
 const getAccessToken = async () => {
+  const currentTime = new Date().getTime();
+
+  if (tokenData.accessToken && tokenData.expiryTime && currentTime < tokenData.expiryTime) {
+    return tokenData.accessToken;
+  }
+
   const params = new URLSearchParams();
   params.append('grant_type', 'client_credentials');
   params.append('client_id', import.meta.env.VITE_AMADEUS_API_KEY);
@@ -15,8 +25,12 @@ const getAccessToken = async () => {
     }
   });
 
-  return response.data.access_token;
+  tokenData.accessToken = response.data.access_token;
+  tokenData.expiryTime = currentTime + (response.data.expires_in * 1000); // expires_in is in seconds
+
+  return tokenData.accessToken;
 };
+
 
 // Function to fetch destination data for multiple cities
 const getDestinations = async (keywords) => {
@@ -72,31 +86,6 @@ const getCountryNameFromCode = async (countryCode) => {
   }
 };
 
-// function to get points of interest
-// const getPointsOfInterest = async (latitude, longitude) => {
-//   const accessToken = await getAccessToken()
-//   try{
-//     const response = await axios.get(`${BASE_URL}/pois`,{
-//       params:{
-//         latitude,
-//         longitude
-//       },
-//       headers:{
-//         'Authorization': `Bearer ${accessToken}`
-//       }
-//     });
-    
-//     const poi_names = response.data.data.map(location => {
-//       const poiName = location.name
-      
-//       return poiName
-//     })
-    
-//     return poi_names
-//   }catch(error){
-//     console.log('FAILED TO FETCH POINTS OF INTEREST', error)
-//   }
-// }
 
 export const getDestinationByCity = async (city) => {
   const accessToken = await getAccessToken();
@@ -114,21 +103,17 @@ export const getDestinationByCity = async (city) => {
     const cityData = response.data.data;
 
     if (cityData.length > 0) {
-      // For each city, we need to fetch the country name
+      
       for (let i = 0; i < cityData.length; i++) {
         const countryCode = cityData[i].address.countryCode;
-//         const latitude = cityData[i].geoCode.latitude
-//         const longitude = cityData[i].geoCode.longitude
-
-
-        const countryName = await getCountryNameFromCode(countryCode);
-//         const pointsOfInterest =  await getPointsOfInterest(latitude, longitude);
         
-        // Enrich the city data with the country name
+        const countryName = await getCountryNameFromCode(countryCode);
+    
+        
+        
         cityData[i].address.countryName = countryName;
+        cityData[i].iataCode = cityData[i].iataCode;
 
-//         //enrich the city data with points of interes
-//         cityData[i].pointsOfInterest = pointsOfInterest
       }
 
       return cityData; // Return the enriched city data array
@@ -142,28 +127,122 @@ export const getDestinationByCity = async (city) => {
   }
 };
 
+
+
+// Function to fetch featured destinations
+export const getFeaturedDestinations = async () => {
+  const accessToken = await getAccessToken();
+  const featuredCities = ['NYC', 'LON', 'TYO', 'SEL']; // Example IATA codes for featured destinations
+
+  const promises = featuredCities.map(async (cityCode) => {
+    try {
+      const response = await axios.get('https://test.api.amadeus.com/v1/reference-data/locations/cities', {
+        params: {
+          keyword: cityCode,
+        },
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const cityData = response.data.data[0]; 
+      return {
+        iataCode: cityCode,
+        name: cityData.name || 'Unknown City',
+        address: {
+          countryName: cityData.address?.countryName || 'Unknown Country',
+        },
+      };
+    } catch (error) {
+      console.error(`Error fetching data for ${cityCode}:`, error);
+      return null;
+    }
+  });
+
+  const results = await Promise.all(promises);
+  return results.filter((city) => city !== null); // Filter out invalid results
+};
+
+
+
 // Flight Offers Search
 
-// Function to get access token
-const getFlightOffers = async (destination) => {
-  try{
- const accessToken = await getAccessToken();
- const response = await axios.get("https:// test.api.amadeus.com/v2/shopping/flight-offers", {
-  params: {
-    originLocationCode: 'YOUR_ORIGIN',
-    destinationLocationCode: destination,
-    departureDate: 'YYYY-MM-DD',
-    adults: 1
-  },
-  headers: {
-    'Authorization': 'Bearer ${accessToken}'
+
+// Function to get flight offers
+export const getFlightOffers = async (destination) => {
+  try {
+    const accessToken = await getAccessToken();
+    console.log('Access Token:', accessToken);
+
+    const today = new Date();
+    const futureDate= new Date (today);
+    futureDate.setDate(futureDate.getDate() + 30);
+    const returnDate = new Date(futureDate);
+    returnDate.setDate(returnDate.getDate() + 10);
+
+    const params = {
+      originLocationCode: 'JFK', // Example origin
+      destinationLocationCode: destination, // Ensure destination is correctly passed
+      departureDate: futureDate.toISOString().split('T')[0], // Example departure date
+      returnDate: returnDate.toISOString().split('T')[0], // Example return date
+      adults: 1
+    };
+
+    console.log('Request Params:', params); // Log request params for debugging
+
+    const response = await axios.get('https://test.api.amadeus.com/v2/shopping/flight-offers', {
+      params,
+      headers: {
+        'Authorization': `Bearer ${accessToken}` 
+      }
+    });
+
+    console.log('API Response:', response.data);
+
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching flight offers:', error);
+    if (error.response) {
+      console.error('Error Response Data:', error.response.data); // Log more details if available
+      console.error('Full Error Response:', error.response);
+    }
+    return [];
   }
- });
- return response.data.data;
-}catch (error) {
-  console.error('Error fetching flight offers:', error)
-  return [];
-}
 };
+// Hotel accomodations by city code
+
+export const getHotelByCityCode = async (cityCode) => {
+  try {
+    const accessToken = await getAccessToken();
+    console.log('Access Token:', accessToken);
+
+    
+    const params = {
+      cityCode
+    };
+
+    console.log('Request Params:', params); // Log request params for debugging
+
+    const response = await axios.get('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city', {
+      params,
+      headers: {
+        'Authorization': `Bearer ${accessToken}` // Ensure correct string interpolation
+      }
+    });
+
+    console.log('HOTEL Response:', response.data);
+
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching flight offers:', error);
+    if (error.response) {
+      console.error('Error Response Data:', error.response.data); // Log more details if available
+      console.error('Full Error Response:', error.response);
+    }
+    return [];
+  }
+};
+
+
 
 
