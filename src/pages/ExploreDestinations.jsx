@@ -19,6 +19,14 @@ const ExploreDestinations = () => {
       { iataCode: 'LON', name: 'London', address: { countryName: 'United Kingdom' }, imageUrl: '/images/pexels-pixabay-460672.jpg' },
       { iataCode: 'TYO', name: 'Tokyo', address: { countryName: 'Japan' }, imageUrl: '/images/pexels-apasaric-2506923.jpg' },
       { iataCode: 'SEL', name: 'Seoul', address: { countryName: 'South Korea' }, imageUrl: '/images/pexels-pixabay-237211.jpg' },
+      { iataCode: 'NBO', name: 'Nairobi', address: {countryName: 'Kenya'}, imageUrl: '/images/pexels-amurephotography-9833516.jpg'},
+      { iataCode: 'AMS', name: 'Amsterdam', address: {countryName: 'Netherlands'}, imageUrl: '/images/pexels-dewi-madden-355159-967292.jpg'},
+      { iataCode: 'ORD', name: 'Chicago', address: {countryName: 'United States'}, imageUrl: '/images/pexels-chaitaastic-1823681.jpg'},
+      { iataCode: 'PEK', name: 'Beijing', address: {countryName: 'China'}, imageUrl: '/images/pexels-magda-ehlers-pexels-2846034.jpg'},
+      { iataCode: 'KIX', name: 'Osaka', address: {countryName: 'Japan'}, imageUrl: '/images/pexels-bagus41-1440476.jpg'},
+      { iataCode: 'YYZ', name: 'Toronto', address: {countryName: 'Canada'}, imageUrl: '/images/pexels-rpnickson-2478248.jpg'},
+      { iataCode: 'MUC', name: 'Munich', address: {countryName: 'Germany'}, imageUrl: '/images/pexels-pixabay-163405.jpg'},
+      { iataCode: 'CPH', name: 'Copenhagen', address: {countryName: 'Denmark'}, imageUrl: '/images/pexels-daniel-jurin-358265-3117216.jpg'},
     ];
 
     setFeaturedDestinations(testDestinations); // Set hardcoded destinations
