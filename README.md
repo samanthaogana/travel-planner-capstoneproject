@@ -25,7 +25,7 @@ The Travel Planner is a web application designed to assist users in planning the
 - **React**: For building the user interface.
 - **Node.js and npm**: For package management and development environment setup.
 - **Tailwind CSS**: For styling and responsive design.
-- **Amadeus API**: For accomodation, activities, and attractions search functionalities.
+- **Amadeus API**: For accomodations, activities, and attractions search functionalities.
 
 ## Installation
 To get started with the Travel Planner, follow these steps:
