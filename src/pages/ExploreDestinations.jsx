@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import DestinationList from "../components/DestinationList";
 import { getDestinationByCity } from "../services/amadeusService";
 import { useNavigate } from "react-router-dom";
@@ -79,7 +81,8 @@ const ExploreDestinations = () => {
           {featuredDestinations.map((destination, index) => (
             <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
               <Link to={`/destination/${destination.iataCode}`}>
-                <img src={destination.imageUrl} alt={destination.name} className="w-full h-48 object-cover" />
+              <LazyLoadImage
+                src={destination.imageUrl} alt={destination.name} effect="blur" className="w-full h-48 object-cover" /> 
                 <div className="p-4">
                   <h3 className="text-xl font-semibold">{destination.name}</h3>
                   <p className="text-gray-600">{destination.address.countryName}</p>
