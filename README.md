@@ -13,7 +13,7 @@ A simple travel planner application to help users plan their trips with ease whi
 - [Contact](#contact)
 
 ## Introduction
-The Travel Planner is a web application designed to assist users in planning their travels. It offers functionalities like booking accommodations, discovering activities and attractions, and creating personalized travel itineraries. This project is developed using React and Tailwind CSS to provide a clean and user-friendly interface.
+The Travel Planner is a web application designed to assist users in planning their travels. It offers functionalities like locating accommodations, discovering activities and attractions, and creating personalized travel itineraries. This project is developed using React and Tailwind CSS to provide a clean and user-friendly interface.
 
 ## Features
 - **Flight Offers**: Find a list of flight offers with different airlines and their prices.
@@ -25,7 +25,7 @@ The Travel Planner is a web application designed to assist users in planning the
 - **React**: For building the user interface.
 - **Node.js and npm**: For package management and development environment setup.
 - **Tailwind CSS**: For styling and responsive design.
-- **Amadeus API**: For accommodation booking, activities, and attractions search functionalities.
+- **Amadeus API**: For accomodation, activities, and attractions search functionalities.
 
 ## Installation
 To get started with the Travel Planner, follow these steps:
