@@ -10,12 +10,12 @@ const TestimonialsPage = () => {
           <p className="text-lg font-poppins italic mb-4">"This service exceeded my expectations! Would 10/10 recommend."</p>
           <p className="font-bold font-poppins">- Ross Lynch</p>
         </div>
-        {/* Add more testimonials as needed */}
+        {/* Testimonial 2*/}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <p className="text-lg font-poppins  italic mb-4">"Post-tour, our band was in desperate need of a getaway. Travelscapes was exactly what we needed. We discovered incredible destinations and accomodations, and the website is a breeze to use!"</p>
           <p className="font-bold font-poppins">- Coldplay</p>
         </div>
-
+        { /* Testimonial 3*/}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <p className="text-lg font-poppins italic mb-4">"I absolutely adore the minimalist and stylish design of Travelscapes! Not only did I discover fantastic adventures, but it's also so user-friendly"</p>
           <p className="font-bold font-poppins">- Rory Gilmore</p>
