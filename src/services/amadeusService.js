@@ -132,7 +132,7 @@ export const getDestinationByCity = async (city) => {
 // Function to fetch featured destinations
 export const getFeaturedDestinations = async () => {
   const accessToken = await getAccessToken();
-  const featuredCities = ['NYC', 'LON', 'TYO', 'SEL']; // Example IATA codes for featured destinations
+  const featuredCities = ['NYC', 'LON', 'TYO', 'SEL', 'NBO','AMS', 'ORD', 'PEK', 'KIX', 'YYZ', 'MUC', 'CPH']; // Example IATA codes for featured destinations
 
   const promises = featuredCities.map(async (cityCode) => {
     try {
