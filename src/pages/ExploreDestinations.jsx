@@ -82,7 +82,7 @@ const ExploreDestinations = () => {
             <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
               <Link to={`/destination/${destination.iataCode}`}>
               <LazyLoadImage
-                src={destination.imageUrl} alt={destination.name} effect="blur" className="w-full h-48 object-cover" /> 
+                src={destination.imageUrl} alt={destination.name} effect="blur" className="w-full aspect-[3/2] object-cover " /> 
                 <div className="p-4">
                   <h3 className="text-xl font-semibold">{destination.name}</h3>
                   <p className="text-gray-600">{destination.address.countryName}</p>
