@@ -8,7 +8,7 @@ const TestimonialsPage = () => {
         {/* Testimonial 1 */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <p className="text-lg font-poppins italic mb-4">"This service exceeded my expectations! Would 10/10 recommend."</p>
-          <p className="font-bold font-poppins">- Ross Lynch</p>
+          <p className="font-bold font-poppins">- Warren Buffet</p>
         </div>
         {/* Testimonial 2*/}
         <div className="bg-white p-6 rounded-lg shadow-md">
